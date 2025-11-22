@@ -55,16 +55,19 @@ const projects = [
     title: "AI Learning Dashboard",
     desc: "SaaS for goals + AI insights with protected routes and custom charts.",
     tags: ["React 19", "Tailwind", "Firebase", "Chart.js"],
+    link: "https://ailearnly.com",
   },
   {
     title: "Study Link",
     desc: "Collaboration app with role-based auth, file sharing, and sessions.",
     tags: ["React", "TS", "Express", "Postgres", "Prisma", "Docker"],
+    link: "https://studylink.dryft.ca",
   },
   {
     title: "Secura Staff App",
     desc: "Employee management with encryption, admin controls, CSV export.",
     tags: ["Python", "tkinter", "cryptography"],
+    link: "https://github.com/mehirk/Secura-Staff-App",
   },
 ];
 
@@ -271,6 +274,13 @@ export default function Home() {
                           {tag}
                         </span>
                       ))}
+                    </div>
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      <Button asChild variant="ghost" size="sm" className="gap-2">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          View <ArrowUpRight className="h-4 w-4" />
+                        </a>
+                      </Button>
                     </div>
                   </Card>
                 </motion.div>

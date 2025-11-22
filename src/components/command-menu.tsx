@@ -10,57 +10,121 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { Github, GraduationCap, Layers, Mail, Search, Sparkles } from "lucide-react";
+import {
+  Github,
+  GraduationCap,
+  Layers,
+  Mail,
+  Search,
+  Sparkles,
+  ArrowUpRight,
+} from "lucide-react";
 
-type CommandLink = {
+type Item = {
   title: string;
-  href: string;
+  href?: string;
   badge?: string;
   icon?: React.ComponentType<{ className?: string }>;
   keywords?: string;
+  action?: () => void;
 };
 
-const links: CommandLink[] = [
+const sections: { heading: string; items: Item[] }[] = [
   {
-    title: "About / Hero",
-    href: "#about",
-    badge: "Intro",
-    icon: Sparkles,
-    keywords: "analytics engineer rbc hero",
+    heading: "Jump to",
+    items: [
+      {
+        title: "About / Hero",
+        href: "#about",
+        badge: "Intro",
+        icon: Sparkles,
+        keywords: "analytics engineer rbc hero",
+      },
+      {
+        title: "Experience",
+        href: "#experience",
+        badge: "Work",
+        icon: Layers,
+        keywords: "rbc analytics engineer co-op acadia desk assistant resident assistant",
+      },
+      {
+        title: "Projects",
+        href: "#projects",
+        badge: "Builds",
+        icon: Search,
+        keywords: "ai learning dashboard study link secura staff app",
+      },
+      {
+        title: "Skills",
+        href: "#skills",
+        badge: "Stacks",
+        icon: GraduationCap,
+        keywords: "typescript react next prisma postgres docker",
+      },
+      {
+        title: "Contact",
+        href: "#contact",
+        badge: "Reach out",
+        icon: Mail,
+        keywords: "email linkedin",
+      },
+    ],
   },
   {
-    title: "Experience",
-    href: "#experience",
-    badge: "Work",
-    icon: Layers,
-    keywords: "rbc analytics engineer co-op acadia desk assistant resident assistant",
+    heading: "Projects",
+    items: [
+      {
+        title: "AI Learning Dashboard",
+        href: "https://ailearnly.com",
+        badge: "Live",
+        icon: ArrowUpRight,
+        keywords: "react tailwind firebase chart js ai",
+      },
+      {
+        title: "Study Link",
+        href: "https://studylink.dryft.ca",
+        badge: "Live",
+        icon: ArrowUpRight,
+        keywords: "collaboration express postgres prisma docker",
+      },
+      {
+        title: "Secura Staff App",
+        href: "https://github.com/mehirk/Secura-Staff-App",
+        badge: "Repo",
+        icon: ArrowUpRight,
+        keywords: "python encryption tkinter csv",
+      },
+    ],
   },
   {
-    title: "Projects",
-    href: "#projects",
-    badge: "Builds",
-    icon: Search,
-    keywords: "ai learning dashboard study link secura staff app",
-  },
-  {
-    title: "Skills",
-    href: "#skills",
-    badge: "Stacks",
-    icon: GraduationCap,
-    keywords: "typescript react next prisma postgres docker",
-  },
-  {
-    title: "Contact",
-    href: "#contact",
-    badge: "Reach out",
-    icon: Mail,
-    keywords: "email linkedin",
-  },
-  {
-    title: "GitHub",
-    href: "https://github.com/mehirk",
-    badge: "External",
-    icon: Github,
+    heading: "Contact & Links",
+    items: [
+      {
+        title: "Copy email",
+        badge: "Action",
+        icon: Mail,
+        action: () => navigator.clipboard?.writeText("mehirk28@gmail.com"),
+        keywords: "email clipboard",
+      },
+      {
+        title: "Email",
+        href: "mailto:mehirk28@gmail.com",
+        badge: "Reach",
+        icon: Mail,
+      },
+      {
+        title: "LinkedIn",
+        href: "https://www.linkedin.com/in/mehirkumar",
+        badge: "External",
+        icon: ArrowUpRight,
+      },
+      {
+        title: "GitHub",
+        href: "https://github.com/mehirk",
+        badge: "External",
+        icon: Github,
+      },
+    ],
   },
 ];
 
@@ -81,12 +145,17 @@ export function CommandMenu() {
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
-    if (!q) return links;
-    return links.filter((link) =>
-      [link.title, link.badge, link.keywords]
-        .filter(Boolean)
-        .some((text) => text!.toLowerCase().includes(q))
-    );
+    if (!q) return sections;
+    return sections
+      .map((section) => ({
+        ...section,
+        items: section.items.filter((item) =>
+          [item.title, item.badge, item.keywords]
+            .filter(Boolean)
+            .some((text) => text!.toLowerCase().includes(q))
+        ),
+      }))
+      .filter((section) => section.items.length > 0);
   }, [query]);
 
   return (
@@ -110,31 +179,38 @@ export function CommandMenu() {
           />
           <CommandList>
             <CommandEmpty>No results.</CommandEmpty>
-            <CommandGroup heading="Sections & Links">
-              {filtered.map((item) => (
-                <CommandItem
-                  key={item.title}
-                  value={item.title}
-                  onSelect={() => {
-                    setOpen(false);
-                    const newTab = item.href.startsWith("http");
-                    if (newTab) {
-                      window.open(item.href, "_blank", "noopener,noreferrer");
-                    } else {
-                      window.location.hash = item.href;
-                    }
-                  }}
-                >
-                  {item.icon ? <item.icon className="mr-2 h-4 w-4" /> : null}
-                  <span className="flex-1">{item.title}</span>
-                  {item.badge ? (
-                    <span className="rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em]">
-                      {item.badge}
-                    </span>
-                  ) : null}
-                </CommandItem>
-              ))}
-            </CommandGroup>
+            {filtered.map((section) => (
+              <CommandGroup key={section.heading} heading={section.heading}>
+                {section.items.map((item) => (
+                  <CommandItem
+                    key={item.title}
+                    value={item.title}
+                    onSelect={() => {
+                      setOpen(false);
+                      if (item.action) {
+                        item.action();
+                        return;
+                      }
+                      if (!item.href) return;
+                      const newTab = item.href.startsWith("http") || item.href.startsWith("mailto:");
+                      if (newTab) {
+                        window.open(item.href, "_blank", "noopener,noreferrer");
+                      } else {
+                        window.location.hash = item.href;
+                      }
+                    }}
+                  >
+                    {item.icon ? <item.icon className="mr-2 h-4 w-4" /> : null}
+                    <span className="flex-1">{item.title}</span>
+                    {item.badge ? (
+                      <span className="rounded-full border border-white/15 bg-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em]">
+                        {item.badge}
+                      </span>
+                    ) : null}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
           </CommandList>
         </Command>
       </CommandDialog>
