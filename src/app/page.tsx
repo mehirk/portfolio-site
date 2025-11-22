@@ -13,6 +13,25 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
+import {
+  SiAngular,
+  SiApacheairflow,
+  SiDocker,
+  SiExpress,
+  SiGit,
+  SiJavascript,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPostman,
+  SiPrisma,
+  SiPython,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import { type IconType } from "react-icons";
 
 const resumeUrl = "/Mehir Kumar Resume (v4.0).pdf";
 
@@ -85,6 +104,34 @@ const fade = {
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.2 },
   transition: { duration: 0.6, ease: "easeOut" },
+};
+
+const iconMap: Record<string, IconType> = {
+  python: SiPython,
+  typescript: SiTypescript,
+  javascript: SiJavascript,
+  react: SiReact,
+  "next.js": SiNextdotjs,
+  tailwind: SiTailwindcss,
+  angular: SiAngular,
+  "node.js": SiNodedotjs,
+  express: SiExpress,
+  prisma: SiPrisma,
+  postgresql: SiPostgresql,
+  mongodb: SiMongodb,
+  docker: SiDocker,
+  airflow: SiApacheairflow,
+  git: SiGit,
+  postman: SiPostman,
+};
+
+const getIcon = (label: string): IconType | null => {
+  const normalized = label.toLowerCase();
+  return (
+    iconMap[normalized] ||
+    iconMap[normalized.replace(/\s+/g, "")] ||
+    iconMap[normalized.replace(/[^a-z0-9.]/g, "")]
+  );
 };
 
 export default function Home() {
@@ -310,8 +357,12 @@ export default function Home() {
                       {group.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-[color:var(--border)]/70 bg-transparent px-3 py-1 text-sm font-semibold text-main"
+                          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)]/70 bg-transparent px-3 py-1 text-sm font-semibold text-main"
                         >
+                          {(() => {
+                            const Icon = getIcon(item);
+                            return Icon ? <Icon className="h-4 w-4" /> : null;
+                          })()}
                           {item}
                         </span>
                       ))}
