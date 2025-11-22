@@ -42,6 +42,12 @@ const highlights = [
   { title: "4.00 / 4.33", desc: "GPA • Dean's List" },
 ];
 
+const wins = [
+  { value: "230+ users", label: "AI Learning Dashboard in 48 hours" },
+  { value: "95%+ sat", label: "IT support across 300+ tickets" },
+  { value: "20% faster", label: "Ticket resolution via team playbooks" },
+];
+
 const work = [
   {
     company: "Royal Bank of Canada — CAO Analytics",
@@ -246,6 +252,43 @@ export default function Home() {
             </Card>
           </motion.section>
 
+          <motion.section className="grid gap-4 md:grid-cols-2" {...fade} id="about">
+            <Card className="p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
+                Wins
+              </p>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                {wins.map((item) => (
+                  <div
+                    key={item.value}
+                    className="rounded-2xl border border-[color:var(--border)]/60 bg-white/5 p-3"
+                  >
+                    <p className="text-xl font-bold text-main">{item.value}</p>
+                    <p className="text-sm text-muted">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
+                How I work
+              </p>
+              <div className="mt-3 space-y-2 text-muted">
+                <p className="text-main font-semibold">
+                  Ship fast, validate, harden
+                </p>
+                <p>
+                  I move from clarity → prototype → secure build. I lean on TypeScript +
+                  React/Next for UI, Prisma/Postgres for reliable data, and Docker for
+                  reproducibility. Metrics are first-class: every feature is paired with
+                  a measurable outcome (activation, satisfaction, or latency). I document
+                  playbooks so teams can repeat wins.
+                </p>
+              </div>
+            </Card>
+          </motion.section>
+
           <motion.section className="space-y-4" id="experience" {...fade}>
             <div className="flex items-center justify-between gap-3">
               <div>
@@ -372,32 +415,26 @@ export default function Home() {
               </div>
             </Card>
 
-            <Card className="relative overflow-hidden p-5">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(135,214,198,0.15),transparent_45%),radial-gradient(circle_at_40%_70%,rgba(246,198,107,0.18),transparent_45%)]" />
-              <div className="relative z-10 space-y-3 text-main">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
-                  Quick actions
-                </p>
-                <h3 className="font-[var(--font-display)] text-2xl">
-                  Need something specific?
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  <Button asChild variant="ghost" className="gap-2">
-                    <a href="#projects">
-                      Browse projects <Search className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button asChild variant="ghost" className="gap-2">
-                    <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
-                      Resume <ArrowUpRight className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button asChild variant="ghost" className="gap-2">
-                    <a href="mailto:mehirk28@gmail.com">
-                      Email <Mail className="h-4 w-4" />
-                    </a>
-                  </Button>
-                </div>
+            <Card className="p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
+                Quick actions
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button asChild variant="ghost" className="gap-2">
+                  <a href="#projects">
+                    Projects <Search className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="ghost" className="gap-2">
+                  <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
+                    Resume <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button asChild variant="ghost" className="gap-2">
+                  <a href="mailto:mehirk28@gmail.com">
+                    Email <Mail className="h-4 w-4" />
+                  </a>
+                </Button>
               </div>
             </Card>
           </motion.section>
