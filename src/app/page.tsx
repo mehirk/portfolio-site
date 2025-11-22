@@ -58,13 +58,13 @@ const work = [
   {
     company: "Acadia Technology Services",
     role: "Student Service Desk Assistant",
-    time: "Aug 2024 – Present • Wolfville",
+    time: "Aug 2024 – December 2025 • Wolfville",
     detail: "300+ issues resolved, 95%+ sat, 20% faster resolution via playbooks.",
   },
   {
-    company: "Resident Assistant, Acadia",
-    role: "Community Lead",
-    time: "Aug 2024 – Present",
+    company: "Acadia Residence Life",
+    role: "Resident Assistant",
+    time: "Aug 2024 – December 2025 • Wolfville",
     detail: "Mentoring 70+ residents, conflict mediation, inclusive events.",
   },
   {
@@ -72,6 +72,13 @@ const work = [
     role: "IT Intern (Junior Software)",
     time: "Jun–Aug 2023 • Dubai",
     detail: "Encrypted password manager, 24+ device rollouts, faster onboarding.",
+  },
+  {
+    company: "Vision Concept Aviation Training",
+    role: "Programmer & Social Media Manager",
+    time: "Sep–Nov 2022 • Dubai",
+    detail:
+      "Automated location plotting (30% time saved) and drove investor engagement with demos and campaigns.",
   },
 ];
 
@@ -359,7 +366,7 @@ export default function Home() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="rounded-full border border-[color:var(--border)]/70 bg-white/5 px-3 py-1 text-xs font-semibold text-main"
+                          className="rounded-full border border-[color:var(--border)]/60 bg-[rgba(255,255,255,0.08)] px-3 py-1 text-xs font-semibold text-main"
                         >
                           {tag}
                         </span>
@@ -379,7 +386,7 @@ export default function Home() {
           </motion.section>
 
           <motion.section
-            className="grid gap-6 lg:grid-cols-[1.2fr,1fr]"
+            className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.8fr)]"
             id="skills"
             {...fade}
           >
@@ -400,7 +407,7 @@ export default function Home() {
                       {group.map((item) => (
                         <span
                           key={item}
-                          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)]/70 bg-transparent px-3 py-1 text-sm font-semibold text-main"
+                          className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)]/60 bg-[rgba(255,255,255,0.08)] px-3 py-1 text-sm font-semibold text-main"
                         >
                           {(() => {
                             const Icon = getIcon(item);
@@ -415,22 +422,22 @@ export default function Home() {
               </div>
             </Card>
 
-            <Card className="p-5">
+            <Card className="p-4 md:p-5 w-full md:w-auto md:max-w-sm self-start">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-200">
                 Quick actions
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                <Button asChild variant="ghost" className="gap-2">
+                <Button asChild variant="ghost" size="sm" className="gap-2">
                   <a href="#projects">
                     Projects <Search className="h-4 w-4" />
                   </a>
                 </Button>
-                <Button asChild variant="ghost" className="gap-2">
+                <Button asChild variant="ghost" size="sm" className="gap-2">
                   <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
                     Resume <ArrowUpRight className="h-4 w-4" />
                   </a>
                 </Button>
-                <Button asChild variant="ghost" className="gap-2">
+                <Button asChild variant="ghost" size="sm" className="gap-2">
                   <a href="mailto:mehirk28@gmail.com">
                     Email <Mail className="h-4 w-4" />
                   </a>
