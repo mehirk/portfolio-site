@@ -4,25 +4,16 @@
 
 /* Theme tokens */
 :root {
-  --bg-gradient: radial-gradient(circle at 20% 20%, rgba(62, 247, 195, 0.08), transparent 30%),
-    radial-gradient(circle at 80% 0%, rgba(246, 183, 106, 0.12), transparent 35%),
-    linear-gradient(135deg, #050a17 0%, #0b1630 100%);
-  --text: #e8edf5;
+  --bg-gradient: radial-gradient(circle at 20% 10%, rgba(242, 223, 176, 0.25), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(129, 178, 154, 0.3), transparent 35%),
+    linear-gradient(135deg, #0f1726 0%, #131b2f 35%, #0c101d 100%);
+  --text: #f5f0e9;
   --panel: rgba(255, 255, 255, 0.05);
   --border: rgba(255, 255, 255, 0.12);
-  --muted: #9fb0c9;
+  --muted: #c8d0e0;
+  --accent: #f6c66b;
+  --accent-2: #87d6c6;
   color-scheme: dark;
-}
-
-[data-theme="light"] {
-  --bg-gradient: radial-gradient(circle at 20% 20%, rgba(62, 247, 195, 0.08), transparent 30%),
-    radial-gradient(circle at 80% 0%, rgba(246, 183, 106, 0.08), transparent 35%),
-    linear-gradient(135deg, #f6f8ff 0%, #e6ecff 100%);
-  --text: #0b1630;
-  --panel: rgba(255, 255, 255, 0.8);
-  --border: rgba(0, 16, 40, 0.12);
-  --muted: #4b5b75;
-  color-scheme: light;
 }
 
 body {
