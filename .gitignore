@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md
+
+# Private resume source files
+/Mehir Kumar Resume (v5.0).pdf
+/public/*Resume*.pdf

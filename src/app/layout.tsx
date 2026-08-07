@@ -1,22 +1,32 @@
 import type { Metadata } from "next";
-import { Manrope, Space_Grotesk } from "next/font/google";
+import { DM_Sans, Lora } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 
-const display = Space_Grotesk({
+const display = Lora({
   subsets: ["latin"],
   variable: "--font-display",
 });
 
-const body = Manrope({
+const body = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
 });
 
 export const metadata: Metadata = {
-  title: "Mehir Kumar | Portfolio",
+  metadataBase: new URL("https://mehirk.dev"),
+  title: "Mehir Kumar | Analytics Engineer & Full-Stack Developer",
   description:
-    "Analytics-minded full-stack engineer. Incoming RBC Analytics Engineer Intern, builder of AI Learning Dashboard and Study Link.",
+    "Analytics engineer and full-stack developer building reliable products, secure infrastructure, and data systems.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Mehir Kumar | Analytics Engineer & Full-Stack Developer",
+    description: "I turn complicated systems into clear, reliable products.",
+    url: "https://mehirk.dev",
+    siteName: "Mehir Kumar",
+    type: "website",
+  },
+  twitter: { card: "summary", title: "Mehir Kumar", description: "Analytics engineer and full-stack developer." },
 };
 
 export default function RootLayout({
